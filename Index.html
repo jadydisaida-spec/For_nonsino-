@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Ilyass 💖</title>
+<style>
+body {
+  margin:0;
+  text-align:center;
+  font-family:Arial;
+  background: linear-gradient(to right, #ff75a2, #ff99c8);
+  color:white;
+  overflow:hidden;
+}
+img {
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  margin:10px;
+  object-fit:cover;
+}
+#hearts {
+  font-size:50px;
+  animation: pulse 1s infinite;
+}
+@keyframes pulse {
+  0% {transform: scale(1);}
+  50% {transform: scale(1.2);}
+  100% {transform: scale(1);}
+}
+#quiz, #finalMessage {
+  display:none;
+  margin-top:20px;
+}
+button {
+  padding:10px 20px;
+  margin:5px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+}
+.bigHeart {
+  font-size:100px;
+  animation: spin 4s linear infinite;
+  margin-top:20px;
+}
+@keyframes spin{
+  0% {transform:rotate(0deg);}
+  100% {transform:rotate(360deg);}
+}
+</style>
+</head>
+<body>
+
+<h1>💖 For Ilyass 💖</h1>
+
+<!-- الصور الأولى -->
+<img src="photo1.jpg" alt="photo1">
+<img src="photo2.jpg" alt="photo2">
+
+<div id="hearts">💞💞</div>
+
+<h2>Upload الصورة السريّة للتحقق 🔒</h2>
+<input type="file" id="imageInput">
+
+<audio id="music" src="CinnamonGirl.mp3"></audio>
+
+<div id="quiz">
+  <h2>Quiz: 3la 3al9tna 💌</h2>
+  <div id="question"></div>
+  <button id="yes">Ah</button>
+  <button id="no">La</button>
+</div>
+
+<div id="finalMessage">
+  <h1>Ti amo amore mio 💕</h1>
+  <div class="bigHeart">❤️</div>
+</div>
+
+<script>
+const correctHash = "e2a5b1910c38aea6f86fb816e955c57fb34b46c4bdcb3e446655871ca785b17a"; // هنا حطي SHA256 ديال الصورة السريّة
+const questions = [
+  "chno hiya lhaja li kat3jbk fia bzaf omatatgolahch lia?😻",
+  "chnahiya lhaja li tatkhaf tf9dha fhad lrelation dyalna?😺",
+  "chnahiya lhda li 3mrha tnsa lik binatna?😊",
+  "chno aktr haja katkhlik ths m3aya bl aman?😸",
+  "chnahiya lhaja li tatfrhk mli tfkr fiha bini obink?😻",
+  "katfkr fmosta9balna?💕",
+  "kaths dsa3ada m3aya?💖 darori hitach smiytu SAIDA 😹 tgol la n9tlk🔪",
+  "chno aktr klma ola tasarof mni kaykhlik tsh b hoob?🙃😻",
+  "chna howa lholm li biti th99 m3aya?😻",
+  "kaths bhob dyalna?😻🔪🙃",
+  "chna howa raeyk fhad lmachkil kamla o dorf lidazt 3lina?🙂😺",
+  "3ndk chi haja tsarhni biha mrhba?😻💗",
+];
+let currentQ = 0;
+
+function verifyImage(file) {
+  const reader = new FileReader();
+  reader.onload = async function() {
+    const arrayBuffer = reader.result;
+    const hashBuffer = await crypto.subtle.digest('SHA-256', arrayBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray.map(b => b.toString(16).padStart(2,'0')).join('');
+    
+    if(hashHex === correctHash){
+      alert("Code صحيح! 🎉 الموسيقى وquiz بداو دابا.");
+      document.getElementById("music").play();
+      startQuiz();
+    } else {
+      alert("Code غير صحيح ❌ جرب صورة أخرى.");
+    }
+  }
+  reader.readAsArrayBuffer(file);
+}
+
+function startQuiz(){
+  document.getElementById("quiz").style.display="block";
+  showQuestion();
+}
+
+function showQuestion(){
+  if(currentQ < uestions.length){
+    document.getElementById("question").textContent = questions[currentQ];
+  } else {
+    document.getElementById("quiz").style.display="none";
+    document.getElementById("finalMessage").style.display="block";
+  }
+}
+
+document.getElementById("yes").addEventListener("click", function(){
+  currentQ++;
+  showQuestion();
+});
+document.getElementById("no").addEventListener("click", function(){
+  alert("Try again 😉");
+});
+
+document.getElementById("imageInput").addEventListener("change", function(){
+  verifyImage(this.files[0]);
+});
+</script>
+
+</body>
+</html>
