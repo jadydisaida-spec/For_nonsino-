@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For Ilyass 💘</title>
+<style>
+body{
+  margin:0;
+  text-align:center;
+  font-family:Arial;
+  background:linear-gradient(to right,#ff758c,#ff7eb3);
+  color:white;
+  overflow:hidden;
+}
+
+h2{margin-top:40px;}
+
+.heart{
+  position:fixed;
+  top:-10px;
+  animation:fall linear forwards;
+}
+
+@keyframes fall{
+  to{
+    transform:translateY(110vh);
+  }
+}
+
+button{
+  padding:10px 20px;
+  border:none;
+  border-radius:20px;
+  cursor:pointer;
+  margin:10px;
+  font-size:16px;
+}
+
+#noBtn{
+  position:relative;
+}
+</style>
+</head>
+<body>
+
+<h2>💘 Welcome Ilyass 💘</h2>
+<p>This page is only for you 😌</p>
+
+<h3>Ilyass… Do you love me? 😏</h3>
+<button onclick="yesAnswer()">YES 💘</button>
+<button id="noBtn" onmouseover="moveNo()">NO 😜</button>
+
+<p id="reply"></p>
+
+<br>
+
+<input type="password" id="code" placeholder="Enter secret code">
+<button onclick="checkCode()">Open</button>
+
+<p id="final"></p>
+
+<script>
+function yesAnswer(){
+  document.getElementById("reply").innerHTML =
+  "😌 I knew it Ilyass… ana tanbghik ktar 💍💞";
+}
+
+function moveNo(){
+  var btn=document.getElementById("noBtn");
+  btn.style.position="absolute";
+  btn.style.top=Math.random()*400+"px";
+  btn.style.left=Math.random()*400+"px";
+}
+
+function checkCode(){
+  var correctCode="ILYASS14";
+  var userCode=document.getElementById("code").value;
+  if(userCode===correctCode){
+    document.getElementById("final").innerHTML=
+    "💖 Surprise Ilyass! Bghit nb9a m3ak dayman 💘";
+  }else{
+    document.getElementById("final").innerHTML=
+    "❌ Wrong code 😏";
+  }
+}
+
+/* 💘 Strong Heart Rain */
+const hearts = ["❤️","💖","💘","💞"];
+
+function createHeart(){
+  const heart=document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML=hearts[Math.floor(Math.random()*hearts.length)];
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.fontSize=Math.random()*30+20+"px";
+  heart.style.animationDuration=Math.random()*3+2+"s";
+  document.body.appendChild(heart);
+  setTimeout(()=>{heart.remove();},5000);
+}
+
+setInterval(createHeart,150);
+</script>
+
+</body>
+</html>
